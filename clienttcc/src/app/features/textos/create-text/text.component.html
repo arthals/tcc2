@@ -1,0 +1,7 @@
+<form [formGroup]="form" class="form">
+  <textarea [froalaEditor] formControlName="texto"></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+
+{{ form.value | json }}
