@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCC.Dominio.Features.Arquivos;
 
 namespace TCC.Dominio.Features.Contextos
 {
@@ -13,5 +14,6 @@ namespace TCC.Dominio.Features.Contextos
         bool Delete(int Id);
         IQueryable<Contexto> GetAll();
         Contexto GetById(long id);
+        void AddArquivoNoContexto(long id, Arquivo arquivo);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using TCC.Dominio.Features.Contextos;
 
 namespace TCC.Dominio.Features.Textos
 {
@@ -9,5 +10,6 @@ namespace TCC.Dominio.Features.Textos
         bool Delete(int Id);
         IQueryable<Texto> GetAll();
         Texto GetById(long id);
+        void ContextoAdd(long id, Contexto contexto);
     }
 }

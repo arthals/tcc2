@@ -6,9 +6,8 @@ namespace TCC.Aplicacao.Features.Arquivos.Command
     public class ArquivoAddCommand
     {
         public string Caminho { get; set; }
-        public string Type { get; set; }
         public string Name { get; set; }
-        public int Id_Contexto { get; set; }
+        public int IdContexto { get; set; }
 
         public virtual ValidationResult Validar()
         {

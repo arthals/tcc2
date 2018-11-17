@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TCC.Dominio.Features.Arquivos;
 using TCC.Dominio.Features.Contextos;
 using TCC.Infra.Dados.Context;
 using TCC.Infra.Dados.Features.Arquivos;
@@ -26,6 +23,13 @@ namespace TCC.Infra.Dados.Features.Contextos
             _context.SaveChanges();
             // Retorna a nova cliente com id atualizado
             return newCliente;
+        }
+
+        public void AddArquivoNoContexto(long id, Arquivo arquivo)
+        {
+            Contexto cont = GetById(id);
+            cont.arquivos.Add(arquivo);
+            Update(cont);
         }
 
         public bool Delete(int Id)

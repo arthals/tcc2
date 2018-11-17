@@ -11,6 +11,7 @@ namespace TCC.Aplicacao.Features.Contextos.Command
     public class UpdateContextoCommand
     {
         public int Id { get; set; }
+        public int IdTexto { get; set; }
         public string Trecho { get; set; }
         public string Significado { get; set; }
 

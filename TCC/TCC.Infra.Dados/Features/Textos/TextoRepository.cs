@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+using TCC.Dominio.Features.Contextos;
 using TCC.Dominio.Features.Textos;
 using TCC.Infra.Dados.Context;
 using TCC.Infra.Dados.Features.Arquivos;
@@ -23,6 +24,13 @@ namespace TCC.Infra.Dados.Features.Textos
             _context.SaveChanges();
             // Retorna a nova cliente com id atualizado
             return newCliente;
+        }
+
+        public void ContextoAdd(long id, Contexto contexto)
+        {
+            Texto txt = GetById(id);
+            txt.Contextos.Add(contexto);
+            Update(txt);
         }
 
         public bool Delete(int Id)

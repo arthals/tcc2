@@ -7,21 +7,26 @@ using System.Threading.Tasks;
 
 using TCC.Aplicacao.Features.Contextos.Command;
 using TCC.Dominio.Features.Contextos;
+using TCC.Dominio.Features.Textos;
 
 namespace TCC.Aplicacao.Features.Contextos
 {
     public class ContextoService : IContextoService
     {
         IContextoRepository _contextoRepository;
+        ITextoRepository _textoRepository;
 
-        public ContextoService(IContextoRepository contextoRepository)
+        public ContextoService(IContextoRepository contextoRepository, ITextoRepository textoRepository)
         {
             _contextoRepository = contextoRepository;
+            _textoRepository = textoRepository;
         }
         public long Add(AddContextoCommand arquivo)
         {
             var _produto = Mapper.Map<AddContextoCommand, Contexto>(arquivo);
             var novoProduto = _contextoRepository.Add(_produto);
+            _textoRepository.ContextoAdd(arquivo.IdTexto, novoProduto);
+
 
             return novoProduto.Id;
         }
