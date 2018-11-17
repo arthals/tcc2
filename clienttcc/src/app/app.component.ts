@@ -12,7 +12,6 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
