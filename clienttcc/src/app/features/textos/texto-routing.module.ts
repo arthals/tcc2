@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CreateTextComponent } from './create-text/text.component';
+import { CreateTextComponent } from './create-text/create-text.component';
 const routes: Routes = [
   {
     path: '',

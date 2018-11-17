@@ -1,10 +1,13 @@
+import { TextoService } from './texto.service';
 import { NgModule } from '@angular/core';
 
-import { TextRoutingModule } from './texto-routing.module';
-import { CreateTextComponent } from './create-text/text.component';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { TextRoutingModule } from './texto-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateTextComponent } from './create-text/create-text.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @NgModule({
   imports: [
@@ -14,16 +17,10 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     FroalaViewModule.forRoot(),
     FroalaEditorModule.forRoot(),
+    HttpClientModule,
   ],
-  declarations: [
-    CreateTextComponent,
-  ],
-  exports: [
-    CreateTextComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-  ]
+  declarations: [CreateTextComponent],
+  exports: [CreateTextComponent, FormsModule, ReactiveFormsModule, CommonModule, HttpClientModule],
+  providers: [TextoService]
 })
-
-export class TextoModule { }
+export class TextoModule {}
