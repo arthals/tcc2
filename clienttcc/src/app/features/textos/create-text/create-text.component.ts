@@ -7,6 +7,7 @@ import { TextoService } from '../texto.service';
 @Component({
   templateUrl: 'create-text.component.html',
 })
+
 export class CreateTextComponent {
   constructor(private fb: FormBuilder,
               private service: TextoService) {}
@@ -19,7 +20,6 @@ export class CreateTextComponent {
     this.service.post(textCmd)
     .take(1)
     .subscribe(() => {
-
-  });
+    });
   }
 }

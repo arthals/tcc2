@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { CreateTextCommand, Texto } from './texto.model';
+import { CreateTextCommand, Texto, UpdateTextCommand } from './texto.model';
 import { AbstractResolveService } from '../shared/utils/abstract-resolve.service';
 import { BaseService } from '../shared/BaseService';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TextoService extends BaseService {
@@ -17,12 +18,13 @@ export class TextoService extends BaseService {
         return this.http.post(this.api, emitter).map((response: boolean) => response);
     }
 
-    /* public put(emitter: EmitterUpdateCommand): Observable<boolean> {
+    public put(emitter: UpdateTextCommand): Observable<boolean> {
         return this.http.put(this.api, emitter).map((response: boolean) => response);
-    } */
-
-    public get(id: number): Observable<Texto> {
-        return this.http.get(`${this.api}/${id}`).map((response: Texto) => response);
+    }
+    public get(id: number) {
+        return this.http
+            .get<Texto>(`${this.api}/${id}`)
+            .pipe(map(data => data));
     }
 }
 @Injectable()
@@ -31,14 +33,14 @@ export class TextoResolveService extends AbstractResolveService<Texto> {
     constructor(private service: TextoService,
         router: Router) {
         super(router);
-        this.paramsProperty = 'emitterId';
+        this.paramsProperty = 'textoId';
     }
 
-    protected loadEntity(emitterId: number): Observable<Texto> {
+    public loadEntity(textoId: number): Observable<Texto> {
         return this.service
-            .get(emitterId)
+            .get(textoId)
             .take(1)
-            .do((emitter: Texto) => {
+            .do((texto: Texto) => {
             });
     }
 }
