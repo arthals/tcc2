@@ -10,3 +10,13 @@ export class CreateTextCommand {
     this.palavras = texto.palavras;
   }
 }
+
+export class UpdateTextCommand {
+  public id: number;
+  public palavras: string;
+
+  constructor(texto: Texto) {
+    this.id = texto.id;
+    this.palavras = texto.palavras;
+  }
+}
