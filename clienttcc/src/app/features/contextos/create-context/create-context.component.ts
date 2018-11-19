@@ -8,7 +8,7 @@ import { CreateContextCommand } from '../contexto.model';
   templateUrl: 'create-Context.component.html',
 })
 
-export class CreateConContextComponent {
+export class CreateContextComponent {
   constructor(private fb: FormBuilder,
               private service: ContextoService) {}
 
