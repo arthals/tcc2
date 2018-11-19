@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CreateTextComponent } from './create-text/create-text.component';
-import { TextDetailComponent } from './view-text/detail-text/detail-text.component';
-import { TextUpdateComponent } from './update-text/update-text.component';
+import { CreateContextComponent } from './create-Context/create-Context.component';
+import { ContextUpdateComponent } from './update-Context/update-Context.component';
+import { ContextDetailComponent } from './view-text/detail-text/detail-text.component';
 
 const routes: Routes = [
   {
@@ -12,30 +12,30 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: CreateTextComponent,
+    component: CreateContextComponent,
   },
   {
-    path: ':textoId/info',
-      component: TextDetailComponent,
+    path: ':ContextoId/info',
+      component: ContextDetailComponent,
   },
   {
-    path: ':textoId/edit',
-      component: TextUpdateComponent,
+    path: ':ContextoId/edit',
+      component: ContextUpdateComponent,
   },
   // {
-  //   path: ':textoId',
+  //   path: ':ContextoId',
   //   resolve: {
-  //     texto: TextoResolveService,
+  //     Contexto: ContextoResolveService,
   //   },
   //   data: {
   //       breadcrumbOptions: {
-  //           breadcrumbId: 'texto',
+  //           breadcrumbId: 'Contexto',
   //       },
   //   },
   //   children: [
   //     {
   //       path: '',
-  //       component: TextoViewComponent,
+  //       component: ContextoViewComponent,
   //       children: [
   //         {
   //           path: '',
@@ -43,11 +43,11 @@ const routes: Routes = [
   //           children: [
   //             {
   //               path: '',
-  //               component: TextDetailComponent,
+  //               component: ContextDetailComponent,
   //             },
   //             {
   //               path: 'edit',
-  //               // Acomponent: TextoEditComponent,
+  //               // Acomponent: ContextoEditComponent,
   //             },
   //           ],
   //         },
@@ -62,4 +62,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TextRoutingModule { }
+export class ContextRoutingModule { }

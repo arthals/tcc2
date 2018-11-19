@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { CreateTextCommand, Texto, UpdateTextCommand } from './texto.model';
+import { CreateContextCommand, Context, UpdateContextCommand } from './Contexto.model';
 import { AbstractResolveService } from '../shared/utils/abstract-resolve.service';
 import { BaseService } from '../shared/BaseService';
 import { HttpClient } from '@angular/common/http';
@@ -9,38 +9,38 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class TextoService extends BaseService {
-    private api = 'http://localhost:49454/api/texto/';
+export class ContextoService extends BaseService {
+    private api = 'http://localhost:49454/api/Contexto/';
     constructor(public httpCliente: HttpClient) {
       super(httpCliente);
     }
-    public post(emitter: CreateTextCommand): Observable<boolean> {
+    public post(emitter: CreateContextCommand): Observable<boolean> {
         return this.http.post(this.api, emitter).map((response: boolean) => response);
     }
 
-    public put(emitter: UpdateTextCommand): Observable<boolean> {
+    public put(emitter: UpdateContextCommand): Observable<boolean> {
         return this.http.put(this.api, emitter).map((response: boolean) => response);
     }
     public get(id: number) {
         return this.http
-            .get<Texto>(`${this.api}/${id}`)
+            .get<Context>(`${this.api}/${id}`)
             .pipe(map(data => data));
     }
 }
 @Injectable()
-export class TextoResolveService extends AbstractResolveService<Texto> {
+export class ContextoResolveService extends AbstractResolveService<Context> {
 
-    constructor(private service: TextoService,
+    constructor(private service: ContextoService,
         router: Router) {
         super(router);
-        this.paramsProperty = 'textoId';
+        this.paramsProperty = 'ContextoId';
     }
 
-    public loadEntity(textoId: number): Observable<Texto> {
+    public loadEntity(ContextoId: number): Observable<Context> {
         return this.service
-            .get(textoId)
+            .get(ContextoId)
             .take(1)
-            .do((texto: Texto) => {
+            .do((contexto: Context) => {
             });
     }
 }

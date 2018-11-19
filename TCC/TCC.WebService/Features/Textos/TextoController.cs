@@ -42,10 +42,14 @@ namespace TCC.WebService.Features.Textos
         [HttpPost]
         public IHttpActionResult Post(AddTextoCommand notaFiscal)
         {
-            return HandleCallback(() => _notaFiscalService.Add(notaFiscal));
+            return HandleCallback(() => _notaFiscalService.Add(notaFiscal)); 
         }
 
-
+        [HttpPut]
+        public IHttpActionResult Put(UpdateTextoCommand notaFiscal)
+        {
+            return HandleCallback(() => _notaFiscalService.Update(notaFiscal));
+        }
         [HttpDelete]
         public IHttpActionResult Delete(DeleteTextoCommand notaFiscal)
         {

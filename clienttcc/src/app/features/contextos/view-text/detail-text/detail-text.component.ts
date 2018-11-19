@@ -1,18 +1,18 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Texto } from '../../texto.model';
-import { TextoService } from '../../texto.service';
+import { Context } from '../../Contexto.model';
+import { ContextoService } from '../../Contexto.service';
 
 @Component({
-  templateUrl: 'detail-text.component.html',
+  templateUrl: 'detail-Context.component.html',
 })
-export class TextDetailComponent implements OnInit {
+export class ContextDetailComponent implements OnInit {
 
   public parser = new DOMParser();
-  public texto: Texto;
+  public Contexto: Context;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-  constructor(private resolver: TextoService,
+  constructor(private resolver: ContextoService,
               private router: Router,
               private route: ActivatedRoute) {
               }
@@ -20,15 +20,15 @@ export class TextDetailComponent implements OnInit {
     ngOnInit(): void {
       let id: any;
       this.route.params.subscribe(params => {
-        id = params['textoId'];
+        id = params['ContextoId'];
       });
 
       this.resolver
          .get(id)
          .subscribe(
-          result => (this.texto = result),
+          result => (this.Contexto = result),
           error => console.log('Deu ruim: ' + error),
-          () => document.getElementById('x').innerHTML = this.texto.palavras
+          () => document.getElementById('x').innerHTML = this.Contexto.palavras
           );
     }
 }

@@ -10,8 +10,15 @@ import { templateJitUrl } from "@angular/compiler";
   templateUrl: "create-text.component.html",
   styleUrls: ["create-text.component.css"]
 })
+<<<<<<< HEAD
 export class CreateTextComponent implements AfterViewInit {
   constructor(private fb: FormBuilder, private service: TextoService) {}
+=======
+
+export class CreateTextComponent {
+  constructor(private fb: FormBuilder,
+              private service: TextoService) {}
+>>>>>>> c31444ab674439d82aea6af72b0f24e1f0c5760c
 
   public form: FormGroup = this.fb.group({
     palavras: ["", Validators.required]
@@ -24,6 +31,7 @@ export class CreateTextComponent implements AfterViewInit {
 
   public onCreate(): void {
     const textCmd: CreateTextCommand = new CreateTextCommand(this.form.value);
+<<<<<<< HEAD
     this.service
       .post(textCmd)
       .take(1)
@@ -60,5 +68,11 @@ export class CreateTextComponent implements AfterViewInit {
     
     button = document.getElementById("btn-save");
     button.addEventListener("click", () => this.onCreate());
+=======
+    this.service.post(textCmd)
+    .take(1)
+    .subscribe(() => {
+    });
+>>>>>>> c31444ab674439d82aea6af72b0f24e1f0c5760c
   }
 }
