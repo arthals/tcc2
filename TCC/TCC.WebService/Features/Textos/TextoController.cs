@@ -41,7 +41,7 @@ namespace TCC.WebService.Features.Textos
 
         [HttpPost]
         public IHttpActionResult Post(AddTextoCommand notaFiscal)
-        {
+       {
             return HandleCallback(() => _notaFiscalService.Add(notaFiscal)); 
         }
 

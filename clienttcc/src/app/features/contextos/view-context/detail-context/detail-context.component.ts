@@ -5,7 +5,7 @@ import { Context } from '../../Contexto.model';
 import { ContextoService } from '../../Contexto.service';
 
 @Component({
-  templateUrl: 'detail-Context.component.html',
+  templateUrl: 'detail-context.component.html',
 })
 export class ContextDetailComponent implements OnInit {
 

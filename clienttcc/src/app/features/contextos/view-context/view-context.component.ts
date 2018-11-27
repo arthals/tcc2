@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: 'view-Context.component.html'
+  templateUrl: 'view-context.component.html'
 })
 export class ContextoViewComponent { }

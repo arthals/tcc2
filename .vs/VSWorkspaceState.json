@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\clienttcc",
+    "\\clienttcc\\e2e",
+    "\\clienttcc\\src",
+    "\\clienttcc\\src\\app",
+    "\\clienttcc\\src\\app\\features",
+    "\\clienttcc\\src\\app\\features\\textos",
+    "\\clienttcc\\src\\app\\features\\textos\\create-text",
+    "\\clienttcc\\src\\app\\features\\textos\\update-text",
+    "\\clienttcc\\src\\app\\features\\textos\\view-text",
+    "\\clienttcc\\src\\app\\features\\textos\\view-text\\detail-text"
+  ],
+  "SelectedNode": "\\clienttcc\\src\\app\\features\\textos\\view-text\\detail-text\\detail-text.component.ts",
+  "PreviewInSolutionExplorer": false
+}

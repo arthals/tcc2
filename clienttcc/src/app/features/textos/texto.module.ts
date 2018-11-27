@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { TextoService, TextoResolveService } from './texto.service';
+import { TextoResolveService, TextoService } from './texto.service';
 import { TextRoutingModule } from './texto-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateTextComponent } from './create-text/create-text.component';

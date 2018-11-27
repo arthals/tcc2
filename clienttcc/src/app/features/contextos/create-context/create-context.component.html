@@ -1,7 +1,5 @@
-<form [formGroup]="form" class="form">
-  <textarea [froalaEditor] formControlName="palavras"></textarea>
-  <button (click)="onCreate()" type="submit">Submit</button>
-</form>
+<div *ngFor="let item of contextos" >
+        <button class="myButton" (click)="onCreate(item.lugar)">{{ item.palavra }}</button>
+</div>
 
-
-{{ form.value | json }}
+{{ botoes | json }}

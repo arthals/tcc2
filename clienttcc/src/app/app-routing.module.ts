@@ -9,6 +9,10 @@ const routes: Routes = [
         path: 'textos',
         loadChildren: './features/textos/texto.module#TextoModule',
       },
+      {
+        path: 'contextos',
+        loadChildren: './features/contextos/contexto.module#ContextoModule',
+      },
     ],
   },
 ];

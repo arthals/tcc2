@@ -1,6 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { Texto } from '../../texto.model';
 import { TextoService } from '../../texto.service';
 
@@ -11,7 +10,6 @@ export class TextDetailComponent implements OnInit {
 
   public parser = new DOMParser();
   public texto: Texto;
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
   constructor(private resolver: TextoService,
               private router: Router,
               private route: ActivatedRoute) {

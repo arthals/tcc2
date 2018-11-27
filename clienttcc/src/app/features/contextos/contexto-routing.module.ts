@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CreateContextComponent } from './create-Context/create-Context.component';
-import { ContextUpdateComponent } from './update-Context/update-Context.component';
-import { ContextDetailComponent } from './view-text/detail-text/detail-text.component';
+import { CreateContextComponent } from './create-context/create-context.component';
+import { ContextUpdateComponent } from './update-context/update-context.component';
+import { ContextDetailComponent } from './view-context/detail-context/detail-context.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'create',
+    redirectTo: '',
   },
   {
-    path: 'create',
+    path: ':TextoId/create',
     component: CreateContextComponent,
   },
   {
-    path: ':ContextoId/info',
+    path: ':TextoId/:ContextoId/info',
       component: ContextDetailComponent,
   },
   {
-    path: ':ContextoId/edit',
+    path: ':TextoId/:ContextoId/edit',
       component: ContextUpdateComponent,
   },
   // {

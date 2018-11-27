@@ -6,13 +6,14 @@ import { ContextoService } from '../Contexto.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  templateUrl: 'update-Context.component.html',
+  templateUrl: 'update-context.component.html',
 })
 export class ContextUpdateComponent implements OnInit {
 
   public parser = new DOMParser();
   public Contexto: Context;
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  public test: string[];
+
   constructor(private resolver: ContextoService,
               private router: Router,
               private route: ActivatedRoute,

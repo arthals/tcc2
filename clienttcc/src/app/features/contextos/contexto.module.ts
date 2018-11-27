@@ -6,10 +6,11 @@ import { ContextoService, ContextoResolveService } from './Contexto.service';
 import { ContextRoutingModule } from './Contexto-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { ContextUpdateComponent } from './update-Context/update-Context.component';
-import { ContextoViewComponent } from './view-text/view-context.component';
-import { ContextDetailComponent } from './view-text/detail-text/detail-text.component';
+import { ContextUpdateComponent } from './update-context/update-context.component';
+import { ContextoViewComponent } from './view-context/view-context.component';
+import { ContextDetailComponent } from './view-context/detail-context/detail-context.component';
 import { CreateContextComponent } from './create-context/create-context.component';
+import { TextoService } from '../textos/texto.service';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { CreateContextComponent } from './create-context/create-context.componen
   ],
   providers: [
     ContextoService,
+    TextoService,
     ContextoResolveService
   ]
 })
