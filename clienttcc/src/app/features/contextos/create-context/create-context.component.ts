@@ -6,8 +6,6 @@ import { CreateContextCommand, Context, ContextButton } from '../Contexto.model'
 import { Router, ActivatedRoute } from '@angular/router';
 import { Texto } from '../../textos/texto.model';
 import { TextoService } from '../../textos/texto.service';
-import { CloudOptions, CloudData } from 'angular-tag-cloud-module';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   templateUrl: 'create-context.component.html',
@@ -17,49 +15,64 @@ import { Observable } from 'rxjs/Observable';
 export class CreateContextComponent implements OnInit {
 
   public texto: Texto;
-  public palavras: string[] = [];
-  public words: CloudData[] = [];
+  public palavras: string[];
   public botoes: Array<number>;
-  public novoContexto = '';
   public contextos: Array<ContextButton>;
   constructor(private resolver: TextoService,
-    private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
-    private service: ContextoService) { this.botoes = new Array<number>(); }
+              private fb: FormBuilder,
+              private router: Router,
+              private route: ActivatedRoute,
+              private service: ContextoService) { this.botoes = new Array<number>(); }
 
   public form: FormGroup = this.fb.group({
     palavras: ['', Validators.required]
   });
-  options: CloudOptions = {
-    // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value
-    width: 1000,
-    height: 400,
-    overflow: false,
-  };
-  data: CloudData[] = [
-  ];
-  teste: CloudData[] = [];
-  updateNewContext(clicked: CloudData) {
-    this.novoContexto += ' ' + clicked.text.trim();
-  }
-  cleanContext() {
-    this.novoContexto = '';
-  }
+
   public onCreate(lugar: number): void {
     let x = false;
-    for (let d = 0; d < this.botoes.length; d++) {
-      if (this.botoes[d] === lugar) {
+    for (let d = 0; d < this.botoes.length; d++ ) {
+      if ( this.botoes[d] === lugar) {
         x = true;
+      }
+    }
+    if (!x) {
+      x = false;
+    for (let d = 0; d < this.botoes.length; d++ ) {
+      x = true;
+      const s = (this.botoes[d] + 1);
+      const a = (this.botoes[d] - 1);
+      if ( s === lugar || a === lugar) {
+        x = false;
+        break;
       }
     }
     if (!x) {
       this.botoes.push(lugar);
     }
+    }
   }
-  newData() {
-    const changedData$: Observable<CloudData[]> = Observable.of(this.teste);
-    changedData$.subscribe(res => this.data = res);
+
+  public juntar(): void {
+    let novoBotao = '';
+    const arrayNovo = this.botoes.sort();
+    const novosBotoes = new Array<ContextButton>();
+    for (let a = 0; a < arrayNovo.length; a++ ) {
+        novoBotao += ' ' + this.contextos[arrayNovo[a]].palavra;
+    }
+    for (let d = 0; d < arrayNovo[0]; d++ ) {
+      novosBotoes.push(this.contextos[d]);
+    }
+    novosBotoes.push(new ContextButton(novoBotao, arrayNovo[0]));
+    const iniRest = arrayNovo[0] + (arrayNovo[arrayNovo.length - 1] - arrayNovo[0]) + 1;
+    for (let d = iniRest; d < this.contextos.length; d++ ) {
+      novosBotoes.push(this.contextos[d]);
+    }
+    this.contextos = new Array<ContextButton>();
+    this.contextos = novosBotoes;
+    for (let d = 0; d < this.contextos.length; d++ ) {
+      this.contextos[d].lugar = d;
+    }
+    this.botoes = new Array<number>();
   }
   ngOnInit(): void {
     let id: any;
@@ -68,21 +81,20 @@ export class CreateContextComponent implements OnInit {
     });
 
     this.resolver
-      .get(id)
-      .subscribe(
-        result => (this.palavras = this.splitHTML(result.palavras)),
-        error => console.log('Deu ruim: ' + error),
-      );
+    .get(id)
+    .subscribe(
+     result => (this.palavras = this.splitHTML(result.palavras)),
+     error => console.log('Deu ruim: ' + error),
+    );
   }
-  private splitHTML(text: string): string[] {
+  public splitHTML(text: string): string[] {
     const re = /<\/{0,1}[a-z]+>/gi;
     const replaced: string = text.replace(re, '');
-
+    this.contextos = new Array<ContextButton>();
     const a: string[] = replaced.split(' ');
-    for (let i = 0; i < a.length; i++) {
-      this.teste.push({ text: a[i], weight: 5});
+    for ( let i = 0; i < a.length; i++) {
+      this.contextos.push(new ContextButton(a[i], i));
     }
-    this.newData();
     return a;
   }
 }

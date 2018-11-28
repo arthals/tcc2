@@ -1,12 +1,8 @@
-<!--<div *ngFor="let item of contextos">
-  <button class="myButton" (click)="onCreate(item.lugar)">{{ item.palavra }}</button>
-</div>-->
 
-{{ words }}
-{{ data | json }}
-<angular-tag-cloud (clicked)="updateNewContext($event)" [data]="data" [width]="options.width" [height]="options.height" [overflow]="options.overflow">
-</angular-tag-cloud>
+<div *ngFor="let item of contextos" >
+        <button class="myButton" (click)="onCreate(item.lugar)">{{ item.palavra }}</button>
+</div>
 
+{{ botoes | json }}
 
-<div>Contexto: {{ novoContexto }}</div>
-<button (click)="cleanContext($event)">Limpar contexto</button>
+<button class="myButton" (click)="juntar()">juntar</button>

@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using TCC.Aplicacao.Features.Textos.Command;
 using TCC.Dominio.Features.Textos;
 
@@ -20,6 +22,9 @@ namespace TCC.Aplicacao.Features.Textos
         public long Add(AddTextoCommand arquivo)
         {
             var _produto = Mapper.Map<AddTextoCommand, Texto>(arquivo);
+           
+            _produto.Palavras = System.Net.WebUtility.HtmlDecode(_produto.Palavras);
+            
             var novoProduto = _textoRepository.Add(_produto);
 
             return novoProduto.Id;
