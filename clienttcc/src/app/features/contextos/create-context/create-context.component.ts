@@ -9,7 +9,7 @@ import { TextoService } from '../../textos/texto.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 @Component({
   templateUrl: 'create-context.component.html',
-  styleUrls: ['create-context.component.css']
+  styleUrls: ['create-context.component.scss']
 })
 
 export class CreateContextComponent implements OnInit {
@@ -18,6 +18,8 @@ export class CreateContextComponent implements OnInit {
   public palavras: string[];
   public botoes: Array<number>;
   public contextos: Array<ContextButton>;
+  public textId: number;
+  public RealTexto: string;
   constructor(public dialog: MatDialog,
               private resolver: TextoService,
               private fb: FormBuilder,
@@ -57,9 +59,16 @@ export class CreateContextComponent implements OnInit {
     let novoBotao = '';
     const arrayNovo = this.botoes.sort();
     const novosBotoes = new Array<ContextButton>();
-    for (let a = 0; a < arrayNovo.length; a++ ) {
-        novoBotao += ' ' + this.contextos[arrayNovo[a]].palavra;
-    }
+    const novo = new Array<ContextButton>();
+    this.RealTexto = this.RealTexto.replace(this.contextos[arrayNovo[0]].palavra,
+      '<a (click)="pegarContexto("arthals1234")" >'
+      + this.contextos[arrayNovo[0]].palavra);
+      this.RealTexto = this.RealTexto.replace(this.contextos[arrayNovo[arrayNovo.length - 1]].palavra,
+        this.contextos[arrayNovo[arrayNovo.length - 1]].palavra + '</a>');
+        console.log(this.RealTexto);
+        for (let a = 0; a < arrayNovo.length; a++ ) {
+      novoBotao += ' ' + this.contextos[arrayNovo[a]].palavra;
+      }
     for (let d = 0; d < arrayNovo[0]; d++ ) {
       novosBotoes.push(this.contextos[d]);
     }
@@ -80,6 +89,7 @@ export class CreateContextComponent implements OnInit {
     let id: any;
     this.route.params.subscribe(params => {
       id = params['TextoId'];
+      this.textId = id;
     });
 
     this.resolver
@@ -89,7 +99,9 @@ export class CreateContextComponent implements OnInit {
      error => console.log('Deu ruim: ' + error),
     );
   }
+
   public splitHTML(text: string): string[] {
+    this.RealTexto = text;
     const re = /<\/{0,1}[a-z]+>/gi;
     const replaced: string = text.replace(re, '');
     this.contextos = new Array<ContextButton>();
@@ -100,27 +112,35 @@ export class CreateContextComponent implements OnInit {
     return a;
   }
 
-
-
-
   openDialog(context: string): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
-      width: '250px',
-      data: {name: context }
+      width: '400px',
+      height: '400px',
+      data: {trecho: context, arquivos: new Array<string|any>(), significado: ''}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.onCreteContext(result);
     });
   }
 
-
-
+  public onCreteContext(a: DialogData): void {
+    const textCmd: CreateContextCommand = new CreateContextCommand(a);
+    textCmd.idTexto = this.textId;
+    this.service
+      .post(textCmd)
+      .take(1)
+      .subscribe(result => {
+      });
+  }
 }
 
 export interface DialogData {
-  animal: string;
-  name: string;
+  significado: string;
+  trecho: string;
+  arquivos: Array<string|any>;
+  arquivo: string|any;
 }
 
 @Component({

@@ -1,8 +1,16 @@
 
 <div *ngFor="let item of contextos" >
+<div class="col-xs-2">
         <button class="myButton" (click)="onCreate(item.lugar)">{{ item.palavra }}</button>
 </div>
+</div>
 
-{{ botoes | json }}
 
-<button class="myButton" (click)="juntar()">juntar</button>
+
+<button mat-raised-button class="myButton" (click)="juntar()">juntar</button>
+
+<div *ngIf="botoes" >
+        <div *ngFor="let item of botoes" >
+                {{ item | json }}
+        </div>
+</div>

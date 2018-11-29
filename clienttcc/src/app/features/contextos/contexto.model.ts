@@ -1,3 +1,5 @@
+import { DialogData } from './create-context/create-context.component';
+
 export class Context {
   public id: number;
   public palavras: string;
@@ -14,12 +16,13 @@ export class ContextButton {
 }
 
 export class CreateContextCommand {
-  public palavras: string;
+  significado: string;
+  trecho: string;
   public idTexto: number;
 
-  constructor(context: Context) {
-    this.palavras = context.palavras;
-  this.idTexto = context.idTexto;
+  constructor(context: DialogData) {
+  this.significado = context.significado;
+  this.trecho = context.trecho;
   }
 }
 

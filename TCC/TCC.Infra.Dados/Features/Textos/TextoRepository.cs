@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TCC.Dominio.Features.Contextos;
 using TCC.Dominio.Features.Textos;
@@ -29,13 +30,16 @@ namespace TCC.Infra.Dados.Features.Textos
         public void ContextoAdd(long id, Contexto contexto)
         {
             Texto txt = GetById(id);
+            if (txt.Contextos == null)
+                txt.Contextos = new List<Contexto>();
+
             txt.Contextos.Add(contexto);
             Update(txt);
         }
 
         public bool Delete(int Id)
         {
-            var contexto = _context.Textos.Where(c => c.Id == Id).FirstOrDefault();
+            var contexto = GetById(Id);
             if (contexto == null)
                 throw new NaoEncontradoException();
             _context.Entry(contexto).State = EntityState.Deleted;
@@ -44,7 +48,7 @@ namespace TCC.Infra.Dados.Features.Textos
 
         public IQueryable<Texto> GetAll() => _context.Textos;
 
-        public Texto GetById(long id) => _context.Textos.Where(a => a.Id == id).FirstOrDefault();
+        public Texto GetById(long id) => _context.Textos.Where(c => c.Id == id).FirstOrDefault();
 
         public bool Update(Texto contexto)
         {

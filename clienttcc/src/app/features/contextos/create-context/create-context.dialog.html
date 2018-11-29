@@ -1,13 +1,15 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Context: {{data.name}}</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
+    <p>Signifado: </p>
+    <input matInput [(ngModel)]="data.significado">
+    <p>Tradução em libras: </p>
+    <input type="file" multiple [(ngModel)]="data.arquivo">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Salvar</button>
 </div>
 
 

@@ -10,11 +10,10 @@ import { ContextoService, ContextoResolveService } from './Contexto.service';
 import { ContextoViewComponent } from './view-context/view-context.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ContextUpdateComponent } from './update-context/update-context.component';
-import { CreateContextComponent } from './create-context/create-context.component';
+import { CreateContextComponent, DialogOverviewExampleDialogComponent } from './create-context/create-context.component';
 import { ContextDetailComponent } from './view-context/detail-context/detail-context.component';
 import { MatFormFieldModule, MatButtonModule, MatInputModule, MatRippleModule, MatDialogModule } from '@angular/material';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -30,13 +29,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   declarations: [
     CreateContextComponent,
     ContextoViewComponent,
     ContextDetailComponent,
-    ContextUpdateComponent
+    ContextUpdateComponent,
+    DialogOverviewExampleDialogComponent
   ],
   exports: [
     CreateContextComponent,
@@ -49,12 +49,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatRippleModule,
     MatDialogModule,
-    BrowserAnimationsModule,
   ],
   providers: [
     ContextoService,
     TextoService,
     ContextoResolveService,
+  ],
+  entryComponents: [
+    DialogOverviewExampleDialogComponent
   ]
 })
 export class ContextoModule {}
