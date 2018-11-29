@@ -12,6 +12,10 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ContextUpdateComponent } from './update-context/update-context.component';
 import { CreateContextComponent } from './create-context/create-context.component';
 import { ContextDetailComponent } from './view-context/detail-context/detail-context.component';
+import { MatFormFieldModule, MatButtonModule, MatInputModule, MatRippleModule, MatDialogModule } from '@angular/material';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   imports: [
     FormsModule,
@@ -22,6 +26,11 @@ import { ContextDetailComponent } from './view-context/detail-context/detail-con
     FroalaViewModule.forRoot(),
     FroalaEditorModule.forRoot(),
     TagCloudModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatDialogModule
   ],
   declarations: [
     CreateContextComponent,
@@ -34,7 +43,13 @@ import { ContextDetailComponent } from './view-context/detail-context/detail-con
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     ContextoService,

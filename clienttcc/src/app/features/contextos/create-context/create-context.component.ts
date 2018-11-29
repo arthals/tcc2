@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { ContextoService } from '../Contexto.service';
@@ -6,7 +6,7 @@ import { CreateContextCommand, Context, ContextButton } from '../Contexto.model'
 import { Router, ActivatedRoute } from '@angular/router';
 import { Texto } from '../../textos/texto.model';
 import { TextoService } from '../../textos/texto.service';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 @Component({
   templateUrl: 'create-context.component.html',
   styleUrls: ['create-context.component.css']
@@ -18,7 +18,8 @@ export class CreateContextComponent implements OnInit {
   public palavras: string[];
   public botoes: Array<number>;
   public contextos: Array<ContextButton>;
-  constructor(private resolver: TextoService,
+  constructor(public dialog: MatDialog,
+              private resolver: TextoService,
               private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
@@ -73,6 +74,7 @@ export class CreateContextComponent implements OnInit {
       this.contextos[d].lugar = d;
     }
     this.botoes = new Array<number>();
+    this.openDialog(novoBotao);
   }
   ngOnInit(): void {
     let id: any;
@@ -97,4 +99,42 @@ export class CreateContextComponent implements OnInit {
     }
     return a;
   }
+
+
+
+
+  openDialog(context: string): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
+      width: '250px',
+      data: {name: context }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
+
+}
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
+
+@Component({
+  selector: 'app-create-context.dialog',
+  templateUrl: 'create-context.dialog.html',
+})
+export class DialogOverviewExampleDialogComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
