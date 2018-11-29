@@ -1,10 +1,15 @@
 
+<div class="row">
+<div class="col-xs-4"></div>
 <div *ngFor="let item of contextos" >
-<div class="col-xs-2">
-        <button class="myButton" (click)="onCreate(item.lugar)">{{ item.palavra }}</button>
+        <div class="col-xs-2">
+        </div>
+        <div class="col-xs-2">
+                <button class="myButton" (click)="onCreate(item.lugar)">{{ item.palavra }}</button>
+        </div>
 </div>
+<div class="col-xs-4"></div>
 </div>
-
 
 
 <button mat-raised-button class="myButton" (click)="juntar()">juntar</button>

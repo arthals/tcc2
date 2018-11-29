@@ -22,7 +22,7 @@ export class TextDetailComponent implements AfterViewInit {
               public dialog: MatDialog) {
               }
 
-      ngAfterViewInit(): void {
+    ngAfterViewInit(): void {
       let id: any;
       this.route.params.subscribe(params => {
         id = params['textoId'];
@@ -36,12 +36,20 @@ export class TextDetailComponent implements AfterViewInit {
           () => document.getElementById('x').outerHTML = this.texto.palavras,
           );
 
-    const button = document.getElementsByClassName('btn-save');
+    const button = document.getElementsByClassName('contextos');
+      // const FILE = '/assets/css/meucss.css';
 
-    for (let x = 0; x < button.length; x++ ) {
-        button[x].addEventListener('click',
-        () => this.readContext(button[x].id));
-     }
+      // const css = document.createElement('link');
+      // css.setAttribute('rel', 'stylesheet');
+      // css.setAttribute('type', 'text/css');
+      // css.setAttribute('href', FILE);
+//
+      // document.getElementsByTagName('head')[0].appendChild(css);
+
+      for (let x = 0; x < button.length; x++ ) {
+          button[x].addEventListener('click',
+          () => this.readContext(button[x].id));
+       }
     }
     public readContext(id: string) {
       const idNumber: number = +id; // y: number
