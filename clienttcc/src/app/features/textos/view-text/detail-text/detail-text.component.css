@@ -1,5 +1,4 @@
-.contextos {
-    color: #009cd0;
-
+.contextos, a:not([href]):not([tabindex]) {
+    color: #009cd0 !important;
 }
 

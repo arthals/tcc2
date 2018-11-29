@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { DialogData } from './create-context/create-context.component';
 
 @Injectable()
 export class ContextoService extends BaseService {
@@ -23,12 +24,15 @@ export class ContextoService extends BaseService {
     }
     public get(id: number) {
         return this.http
-            .get<Context>(`${this.api}/${id}`)
+            .get<DialogData>(`${this.api}/${id}`)
             .pipe(map(data => data));
     }
 }
 @Injectable()
 export class ContextoResolveService extends AbstractResolveService<Context> {
+    protected loadEntity(entityId: number): Observable<Context> {
+        throw new Error('Method not implemented.');
+    }
 
     constructor(private service: ContextoService,
         router: Router) {
@@ -36,11 +40,4 @@ export class ContextoResolveService extends AbstractResolveService<Context> {
         this.paramsProperty = 'ContextoId';
     }
 
-    public loadEntity(ContextoId: number): Observable<Context> {
-        return this.service
-            .get(ContextoId)
-            .take(1)
-            .do((contexto: Context) => {
-            });
-    }
 }

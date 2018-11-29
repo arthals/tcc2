@@ -3,6 +3,8 @@ import { DialogData } from './create-context/create-context.component';
 export class Context {
   public id: number;
   public palavras: string;
+  public trecho: string;
+  public significado: string;
   public idTexto: number;
   // A  public conContexts: ConContexts[] = [];
 }
