@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, AfterViewInit, Inject } from '@angular/core';
 import { Texto } from '../../texto.model';
@@ -21,6 +22,7 @@ export class TextDetailComponent implements AfterViewInit {
               private router: Router,
               private route: ActivatedRoute,
               private service: ContextoService,
+              private httpClient: HttpClient,
               public dialog: MatDialog) {
               }
 
@@ -43,6 +45,7 @@ export class TextDetailComponent implements AfterViewInit {
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
+            // tslint:disable-next-line:triple-equals
             if (event.target == modal) {
                 modal.style.display = 'none';
             }
@@ -70,6 +73,7 @@ export class TextDetailComponent implements AfterViewInit {
       const fun = this.readContext;
       const modal = document.getElementById('myModal');
       const s = this.service;
+
       $('.contextos').click(function() {
         modal.style.display = 'block';
         fun.call(this.id, s);
@@ -78,8 +82,8 @@ export class TextDetailComponent implements AfterViewInit {
 
     public readContext(id: string, service: ContextoService) {
       const idNumber: number = +id; // y: number
-
-      service
+      const serviceNov = new ContextoService(this.httpClient);
+      serviceNov
          .get(idNumber)
          .subscribe(
           result => (this.contexto = result)
