@@ -43,7 +43,7 @@ namespace TCC.Infra.Dados.Features.Contextos
 
         public IQueryable<Contexto> GetAll() => _context.Contextos;
 
-        public Contexto GetById(long id) => _context.Contextos.Where(a => a.Id == id).FirstOrDefault();
+        public Contexto GetById(long id) => _context.Contextos.Find(id);
 
         public bool Update(Contexto contexto)
         {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, AfterViewInit, Inject } from '@angular/core';
+import { Component, AfterViewInit, Inject, Input } from '@angular/core';
 import { Texto } from '../../texto.model';
 import { TextoService } from '../../texto.service';
 import { ContextoService } from 'src/app/features/contextos/Contexto.service';
@@ -8,16 +8,17 @@ import { Context } from 'src/app/features/contextos/Contexto.model';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { DialogData } from 'src/app/features/contextos/create-context/create-context.component';
 import * as $ from 'jquery';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   templateUrl: 'detail-text.component.html',
   styleUrls: ['detail-text.component.css']
 })
 export class TextDetailComponent implements AfterViewInit {
-
   public parser = new DOMParser();
   public texto: Texto;
   public contexto: Context;
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   constructor(private resolver: TextoService,
               private router: Router,
               private route: ActivatedRoute,
@@ -69,22 +70,34 @@ export class TextDetailComponent implements AfterViewInit {
     public tudo(palavras: string) {
 
       document.getElementById('x').outerHTML = palavras;
-      const button = document.getElementsByClassName('contextos');
-      const fun = this.readContext;
       const modal = document.getElementById('myModal');
-      const s = this.service;
+      let contexts = this.contexto;
+
 
       $('.contextos').click(function() {
+        $.ajax({
+          url: 'http://localhost:49454/api/Contexto/' + this.id,
+          dataType: 'json',
+          type: 'get',
+          contentType: 'application/json',
+          data: JSON.stringify(DatesContexts),
+          processData: true,
+          success: function (data) {
+            contexts = data;
+            let a = document.getElementById('InsidModalTrecho');
+            a.innerHTML = contexts.trecho;
+            a = document.getElementById('InsidModalSignificado');
+            a.innerHTML = contexts.significado;
+          }
+        });
         modal.style.display = 'block';
-        fun.call(this.id, s);
+        // fun.call(contexts , this.id, s);
       });
     }
 
-    public readContext(id: string, service: ContextoService) {
-      const idNumber: number = +id; // y: number
-      const serviceNov = new ContextoService(this.httpClient);
-      serviceNov
-         .get(idNumber)
+    public readContext(id: number,  service: ContextoService,  a: any) {
+      service
+         .get(id)
          .subscribe(
           result => (this.contexto = result)
           );
@@ -105,6 +118,10 @@ export class TextDetailComponent implements AfterViewInit {
 }
 
 
+export class DatesContexts {
+  public trecho: any;
+  public significado: any;
+}
 
 @Component({
   selector: 'app-create-text.dialog',

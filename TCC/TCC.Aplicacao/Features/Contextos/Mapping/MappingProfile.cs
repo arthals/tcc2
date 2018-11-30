@@ -19,8 +19,9 @@ namespace TCC.Aplicacao.Features.Contextos.Mapping
         {
             CreateMap<AddContextoCommand, Contexto>(); 
 
-            CreateMap<Contexto, ContextoViewModel>();
-            
+            CreateMap<Contexto, ContextoViewModel>()
+                .ForMember(e => e.IdsArquivo, mc => mc.MapFrom(em => em.arquivos.Select(e => e.Id).ToArray()));
+
             CreateMap<UpdateContextoCommand, Contexto>();
         }
 

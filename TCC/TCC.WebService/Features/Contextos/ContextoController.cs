@@ -44,8 +44,7 @@ namespace TCC.WebService.Features.Contextos
         {
             return HandleCallback(() => _notaFiscalService.Add(notaFiscal));
         }
-
-
+        
         [HttpDelete]
         public IHttpActionResult Delete(DeleteContextoCommand notaFiscal)
         {
