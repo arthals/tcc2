@@ -10,6 +10,6 @@ namespace TCC.Aplicacao.Features.Contextos.ViewModel
     {
         public string Trecho { get; set; }
         public string Significado { get; set; }
-        public int[] IdsArquivo { get; set; }
+        public string[] IdsArquivo { get; set; }
     }
 }

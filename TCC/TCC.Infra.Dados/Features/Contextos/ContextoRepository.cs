@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TCC.Dominio.Features.Arquivos;
 using TCC.Dominio.Features.Contextos;
@@ -43,7 +44,17 @@ namespace TCC.Infra.Dados.Features.Contextos
 
         public IQueryable<Contexto> GetAll() => _context.Contextos;
 
-        public Contexto GetById(long id) => _context.Contextos.Find(id);
+        public Contexto GetById(long id) {
+
+        var ne = _context.Contextos.Where(e => e.Id == id).FirstOrDefault();
+           var a = _context.Database.SqlQuery<Arquivo>(
+                @"SELECT TBArquivo.Caminho, TBArquivo.Id, TBArquivo.Name
+                    FROM ContextoArquivoes
+                    inner join TBArquivo on TBArquivo.id = ContextoArquivoes.Arquivo_Id
+                    where ContextoArquivoes.Contexto_Id = " + ne.Id);
+            ne.arquivos = a.ToList();
+        return ne;
+        } 
 
         public bool Update(Contexto contexto)
         {

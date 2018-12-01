@@ -20,7 +20,7 @@ namespace TCC.Aplicacao.Features.Contextos.Mapping
             CreateMap<AddContextoCommand, Contexto>(); 
 
             CreateMap<Contexto, ContextoViewModel>()
-                .ForMember(e => e.IdsArquivo, mc => mc.MapFrom(em => em.arquivos.Select(e => e.Id).ToArray()));
+                .ForMember(e => e.IdsArquivo, mc => mc.MapFrom(em => em.arquivos.Select(e => e.Caminho).ToArray()));
 
             CreateMap<UpdateContextoCommand, Contexto>();
         }

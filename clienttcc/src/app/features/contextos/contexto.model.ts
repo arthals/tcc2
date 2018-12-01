@@ -6,6 +6,7 @@ export class Context {
   public trecho: string;
   public significado: string;
   public idTexto: number;
+  public idsArquivo: any;
   // A  public conContexts: ConContexts[] = [];
 }
 export class ContextButton {

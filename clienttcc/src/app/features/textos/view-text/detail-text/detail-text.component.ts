@@ -88,7 +88,12 @@ export class TextDetailComponent implements AfterViewInit {
             a.innerHTML = contexts.trecho;
             a = document.getElementById('InsidModalSignificado');
             a.innerHTML = contexts.significado;
-          }
+            a = document.getElementById('videolibras');
+            a.innerHTML = '<iframe width="420" height="315" src="' + contexts.idsArquivo[0] + '?rel=0&amp;autoplay=1&mute=1" ></iframe>';
+            for (let x = 1; x < contexts.idsArquivo.length ; x++) {
+              a.innerHTML = a.innerHTML + '<img width="420" height="315" src="assets/img/' + contexts.idsArquivo[x] + '.jpg">';
+            }
+          },
         });
         modal.style.display = 'block';
         // fun.call(contexts , this.id, s);
@@ -121,6 +126,7 @@ export class TextDetailComponent implements AfterViewInit {
 export class DatesContexts {
   public trecho: any;
   public significado: any;
+  public idsArquivo: any;
 }
 
 @Component({
